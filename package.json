@@ -12,6 +12,8 @@
   "dependencies": {
     "@middy/core": "^3.4.0",
     "@middy/http-json-body-parser": "^3.4.0",
+    "dotenv": "^16.0.3",
+    "dynamoose": "^3.1.0",
     "offline": "^0.0.1"
   },
   "devDependencies": {

@@ -6,7 +6,7 @@ import addFilm from "@functions/addFilm";
 const serverlessConfiguration: AWS = {
   service: "filmsApi",
   frameworkVersion: "3",
-  plugins: ["serverless-esbuild","serverless-offline"],
+  plugins: ["serverless-esbuild", "serverless-offline"],
   provider: {
     name: "aws",
     runtime: "nodejs16.x",
@@ -18,6 +18,10 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
+    
+    region: "us-west-2",
+    timeout: 30,
+    profile: "luissevilla111",
   },
   // import the function via paths
   functions: { hello, addFilm },

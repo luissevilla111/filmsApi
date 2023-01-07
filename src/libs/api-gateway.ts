@@ -17,3 +17,10 @@ export const errorJSONResponse = (response: Record<string, unknown>) => {
     body: JSON.stringify(response)
   }
 }
+
+export const badRequestJSONResponse = (response: Record<string, unknown>) => {
+  return {
+    statusCode: 400,
+    body: JSON.stringify(response)
+  }
+}
