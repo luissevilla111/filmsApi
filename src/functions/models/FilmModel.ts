@@ -3,9 +3,9 @@ import * as dynamoose from "dynamoose";
 import { Item } from "dynamoose/dist/Item";
 
 class Film extends Item {
-  ID: string;
+  Saga: string;
   Name: string;
-  Added_Time: string;
+  Added_Time_Utc: string;
   Description: string;
   Duration_Minutes: string;
   Gender: string;
@@ -14,9 +14,9 @@ class Film extends Item {
 
 const filmSchema = new dynamoose.Schema(
   {
-    ID: String,
+    Saga: String,
     Name: String,
-    Added_Time: String,
+    Added_Time_Utc: String,
     Description: String,
     Duration_Minutes: String,
     Gender: String,
@@ -27,7 +27,7 @@ const filmSchema = new dynamoose.Schema(
   }
 );
 
-export const FilmModel = dynamoose.model<Film>("Film", filmSchema, {
+export const FilmModel = dynamoose.model<Film>("Films", filmSchema, {
   create: false,
   waitForActive: false,
 });

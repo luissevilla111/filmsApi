@@ -1,4 +1,5 @@
 import type { AWS } from "@serverless/typescript";
+require("dotenv").config();
 
 import hello from "@functions/hello";
 import addFilm from "@functions/addFilm";
@@ -18,10 +19,17 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
     },
-    
+
     region: "us-west-2",
     timeout: 30,
     profile: "luissevilla111",
+    iamRoleStatements: [
+      {
+        Effect: "Allow",
+        Action: ["dynamodb:PutItem"],
+        Resource: [`${process.env.DYNAMO_RESOURCE}`],
+      },
+    ],
   },
   // import the function via paths
   functions: { hello, addFilm },

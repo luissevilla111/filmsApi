@@ -1,5 +1,8 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/api-gateway";
-import * as dynamoose from "dynamoose";
+import {
+  errorJSONResponse,
+  ValidatedEventAPIGatewayProxyEvent,
+} from "@libs/api-gateway";
+//import * as dynamoose from "dynamoose";
 import { FilmModel } from "@functions/models/FilmModel";
 import {
   formatJSONResponse,
@@ -10,30 +13,48 @@ import { middyfy } from "@libs/lambda";
 
 import schema from "./schema";
 
+require("dotenv").config();
+
 const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  
-  const { name, description, durationMinutes, gender, imageUrl } = event.body;
+  try {
+    const { name, description, durationMinutes, gender, imageUrl, saga } =
+      event.body;
 
-  if (!name || !description || !durationMinutes || !gender || !imageUrl) {
-    return badRequestJSONResponse({
-      message: "Algunos campos que mandaste estan vacios",
+    if (
+      !name ||
+      !description ||
+      !durationMinutes ||
+      !gender ||
+      !imageUrl ||
+      !saga
+    ) {
+      return badRequestJSONResponse({
+        message: "Algunos campos que mandaste estan vacios",
+      });
+    }
+
+    const newFilm = await FilmModel.create({
+      Added_Time_Utc: "10-10-2010",
+      Description: description,
+      Duration_Minutes: durationMinutes,
+      Gender: gender,
+      Image_Url: imageUrl,
+      Name: name,
+      Saga: saga.toLocaleUpperCase(),
+    });
+    console.log(newFilm);
+
+    return formatJSONResponse({
+      film: newFilm,
+    });
+  } catch (err) {
+    console.log(err);
+    return errorJSONResponse({
+      message: "Something Went Wrong",
     });
   }
-
-  const newFilm = await FilmModel.create({
-    Description: description,
-    Duration_Minutes: durationMinutes,
-    Gender: gender,
-    Image_Url: imageUrl,
-    Name: name,
-  });
-  console.log(newFilm);
-
-  return formatJSONResponse({
-    test: "newFilm",
-  });
 };
 
 export const main = middyfy(addFilm);
