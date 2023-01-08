@@ -42,7 +42,7 @@ const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       Gender: gender,
       Image_Url: imageUrl,
       Name: name,
-      Saga: saga.toLocaleUpperCase(),
+      Saga: saga.toUpperCase(),
     });
     console.log(newFilm);
 
