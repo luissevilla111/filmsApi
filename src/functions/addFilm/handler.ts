@@ -19,14 +19,14 @@ const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   try {
-    const { name, description, durationMinutes, gender, imageUrl, saga } =
+    const { name, description, durationMinutes, genders, imageUrl, saga } =
       event.body;
 
     if (
       !name ||
       !description ||
       !durationMinutes ||
-      !gender ||
+      !genders ||
       !imageUrl ||
       !saga
     ) {
@@ -39,12 +39,12 @@ const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       Added_Time_Utc: "10-10-2010",
       Description: description,
       Duration_Minutes: durationMinutes,
-      Gender: gender,
+      Genders: genders.map((gender) => gender.toUpperCase()),
       Image_Url: imageUrl,
-      Name: name,
+      Name: name.toUpperCase(),
       Saga: saga.toUpperCase(),
     });
-    console.log(newFilm);
+    //console.log(newFilm);
 
     return formatJSONResponse({
       film: newFilm,

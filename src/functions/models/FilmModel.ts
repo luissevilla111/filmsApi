@@ -8,7 +8,7 @@ class Film extends Item {
   Added_Time_Utc: string;
   Description: string;
   Duration_Minutes: string;
-  Gender: string;
+  Genders: string[];
   Image_Url: string;
 }
 
@@ -19,11 +19,12 @@ const filmSchema = new dynamoose.Schema(
     Added_Time_Utc: String,
     Description: String,
     Duration_Minutes: String,
-    Gender: String,
+    Genders: { type: Array },
     Image_Url: String,
   },
   {
     timestamps: true,
+    saveUnknown: true,
   }
 );
 

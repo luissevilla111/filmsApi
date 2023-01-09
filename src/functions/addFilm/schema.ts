@@ -5,7 +5,7 @@ export default {
     name: { type: "string" },
     description: { type: "string" },
     imageUrl: { type: "string" },
-    gender: { type: "string" },
+    genders: { type: "array", items: { type: "string" } },
     durationMinutes: { type: "string" },
   },
   required: [
@@ -13,7 +13,7 @@ export default {
     "name",
     "description",
     "imageUrl",
-    "gender",
+    "genders",
     "durationMinutes",
   ],
 } as const;
