@@ -12,6 +12,7 @@ import {
 import { middyfy } from "@libs/lambda";
 
 import schema from "./schema";
+const moment = require("moment");
 
 require("dotenv").config();
 
@@ -35,8 +36,9 @@ const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       });
     }
 
+    const timeNow = moment.utc().format();
     const newFilm = await FilmModel.create({
-      Added_Time_Utc: "10-10-2010",
+      Added_Time_Utc: timeNow.toString(),
       Description: description,
       Duration_Minutes: durationMinutes,
       Genders: genders.map((gender) => gender.toUpperCase()),
