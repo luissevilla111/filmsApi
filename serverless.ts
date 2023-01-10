@@ -3,6 +3,7 @@ require("dotenv").config();
 
 import hello from "@functions/hello";
 import addFilm from "@functions/addFilm";
+import getFilms from "@functions/getFilms";
 
 const serverlessConfiguration: AWS = {
   service: "filmsApi",
@@ -32,7 +33,7 @@ const serverlessConfiguration: AWS = {
     ],
   },
   // import the function via paths
-  functions: { hello, addFilm },
+  functions: { hello, addFilm, getFilms },
   package: { individually: true },
   custom: {
     esbuild: {
