@@ -40,11 +40,11 @@ const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     const newFilm = await FilmModel.create({
       Added_Time_Utc: timeNow.toString(),
       Description: description,
-      Duration_Minutes: durationMinutes,
-      Genders: genders.map((gender) => gender.toUpperCase()),
+      Duration_Minutes: durationMinutes.trim(),
+      Genders: genders.map((gender) => gender.toUpperCase().trim()),
       Image_Url: imageUrl,
-      Name: name.toUpperCase(),
-      Saga: saga.toUpperCase(),
+      Name: name.toUpperCase().trim(),
+      Saga: saga.toUpperCase().trim(),
     });
     //console.log(newFilm);
 
