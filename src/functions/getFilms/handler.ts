@@ -8,7 +8,6 @@ import { formatJSONResponse, badRequestJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 
 import schema from "./schema";
-const moment = require("moment");
 
 require("dotenv").config();
 
@@ -16,8 +15,13 @@ const getFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   try {
+    const films = await FilmModel.scan().limit(1).exec();
+    const { lastKey } = films;
+    console.log(films);
+
     return formatJSONResponse({
-      films: [],
+      films,
+      lastPage: lastKey,
     });
   } catch (err) {
     console.log(err);
