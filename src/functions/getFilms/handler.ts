@@ -10,18 +10,36 @@ import { middyfy } from "@libs/lambda";
 import schema from "./schema";
 
 require("dotenv").config();
+const SCAN_LIMIT = process.env.SCAN_LIMIT ? +process.env.SCAN_LIMIT : 10;
 
 const getFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   try {
-    const films = await FilmModel.scan().limit(1).exec();
+    console.log(SCAN_LIMIT);
+    const queryParams = event.queryStringParameters;
+
+    let StartAt: null | Object = null;
+    if (queryParams) {
+      const Saga = queryParams.Saga;
+      const Name = queryParams.Name;
+      StartAt = {
+        Saga,
+        Name,
+      };
+    }
+
+    const films = await FilmModel.scan()
+      .startAt(StartAt)
+      .limit(SCAN_LIMIT)
+      .exec();
     const { lastKey } = films;
+
     console.log(films);
 
     return formatJSONResponse({
       films,
-      lastPage: lastKey,
+      lastKey,
     });
   } catch (err) {
     console.log(err);
