@@ -2,7 +2,7 @@ import * as dynamoose from "dynamoose";
 
 import { Item } from "dynamoose/dist/Item";
 
-class Film extends Item {
+export class Film extends Item {
   Saga: string;
   Name: string;
   Added_Time_Utc: string;
@@ -14,8 +14,8 @@ class Film extends Item {
 
 const filmSchema = new dynamoose.Schema(
   {
-    Saga: String,
-    Name: String,
+    Saga: { type: String, hashKey: true },
+    Name: { type: String, rangeKey: true },
     Added_Time_Utc: String,
     Description: String,
     Duration_Minutes: String,

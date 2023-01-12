@@ -3,7 +3,7 @@ import {
   ValidatedEventAPIGatewayProxyEvent,
 } from "@libs/api-gateway";
 //import * as dynamoose from "dynamoose";
-import { FilmModel } from "@functions/models/FilmModel";
+import { FilmModel, Film } from "@functions/models/FilmModel";
 import { formatJSONResponse, badRequestJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 
@@ -16,16 +16,51 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   try {
-    const films = await FilmModel.query("Saga")
-      .eq("EJEMPLO")
-      .and()
-      .where("Name")
-      .eq("EJEMPLO PARTE 2")
-      .exec();
-    //console.log(FilmModel.table().hashKey);
-    console.log(films);
+    const { name, description, durationMinutes, genders, imageUrl, saga } =
+      event.body;
+
+    if (
+      !name ||
+      !description ||
+      !durationMinutes ||
+      !genders ||
+      !imageUrl ||
+      !saga
+    ) {
+      return badRequestJSONResponse({
+        message: "Algunos campos que mandaste estan vacios",
+      });
+    }
+
+    const film = await FilmModel.get({
+      Saga: saga.toString(),
+      Name: name.toString(),
+    });
+
+    //console.log(film);
+
+    film.Description = description;
+    film.Duration_Minutes = durationMinutes;
+    film.Genders = genders;
+    film.Image_Url = imageUrl;
+
+    await film.save();
+
+    //console.log(film);
+    /* const key = {
+      Saga: saga.toString(),
+      Name: name.toString(),
+    };
+
+    const updateProperties: Partial<Film> = {
+      Description: description,
+      Duration_Minutes: durationMinutes,
+      Genders: genders,
+      Image_Url: imageUrl,
+    };
+    const film = await FilmModel.update(key, updateProperties); */
     return formatJSONResponse({
-      films,
+      film,
     });
   } catch (err) {
     console.log(err);
