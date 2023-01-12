@@ -6,7 +6,7 @@ export default {
   events: [
     {
       http: {
-        method: 'get',
+        method: 'put',
         path: 'films',
         /* request: {
           schemas: {

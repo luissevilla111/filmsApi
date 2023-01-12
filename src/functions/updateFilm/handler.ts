@@ -12,34 +12,20 @@ import schema from "./schema";
 require("dotenv").config();
 const SCAN_LIMIT = process.env.SCAN_LIMIT ? +process.env.SCAN_LIMIT : 10;
 
-const getFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   try {
-    //console.log(SCAN_LIMIT);
-    const queryParams = event.queryStringParameters;
-
-    let StartAt: null | Object = null;
-    if (queryParams) {
-      const Saga = queryParams.Saga;
-      const Name = queryParams.Name;
-      StartAt = {
-        Saga,
-        Name,
-      };
-    }
-
-    const films = await FilmModel.scan()
-      .startAt(StartAt)
-      .limit(SCAN_LIMIT)
+    const films = await FilmModel.query("Saga")
+      .eq("EJEMPLO")
+      .and()
+      .where("Name")
+      .eq("EJEMPLO PARTE 2")
       .exec();
-    const { lastKey } = films;
-
+    //console.log(FilmModel.table().hashKey);
     console.log(films);
-
     return formatJSONResponse({
       films,
-      lastKey,
     });
   } catch (err) {
     console.log(err);
@@ -49,4 +35,4 @@ const getFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 };
 
-export const main = middyfy(getFilm);
+export const main = middyfy(updateFilm);
