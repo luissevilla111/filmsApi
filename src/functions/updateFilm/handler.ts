@@ -40,13 +40,10 @@ const getFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     return formatJSONResponse({
       films,
       lastKey,
-      message: "",
     });
   } catch (err) {
     console.log(err);
     return errorJSONResponse({
-      films: [],
-      lastKey: {},
       message: "Something Went Wrong",
     });
   }
