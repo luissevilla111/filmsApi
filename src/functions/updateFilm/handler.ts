@@ -3,14 +3,13 @@ import {
   ValidatedEventAPIGatewayProxyEvent,
 } from "@libs/api-gateway";
 //import * as dynamoose from "dynamoose";
-import { FilmModel, Film } from "@functions/models/FilmModel";
+import { FilmModel } from "@functions/models/FilmModel";
 import { formatJSONResponse, badRequestJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 
 import schema from "./schema";
 
 require("dotenv").config();
-const SCAN_LIMIT = process.env.SCAN_LIMIT ? +process.env.SCAN_LIMIT : 10;
 
 const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
