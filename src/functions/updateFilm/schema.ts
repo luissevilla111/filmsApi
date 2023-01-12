@@ -7,6 +7,7 @@ export default {
     imageUrl: { type: "string" },
     genders: { type: "array", items: { type: "string" } },
     durationMinutes: { type: "string" },
+    stars: { type: "number" },
   },
   required: [
     "saga",
@@ -15,5 +16,6 @@ export default {
     "imageUrl",
     "genders",
     "durationMinutes",
+    "stars",
   ],
 } as const;

@@ -16,8 +16,15 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   try {
-    const { name, description, durationMinutes, genders, imageUrl, saga } =
-      event.body;
+    const {
+      name,
+      description,
+      durationMinutes,
+      genders,
+      imageUrl,
+      saga,
+      stars,
+    } = event.body;
 
     if (
       !name ||
@@ -25,7 +32,8 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       !durationMinutes ||
       !genders ||
       !imageUrl ||
-      !saga
+      !saga ||
+      !stars
     ) {
       return badRequestJSONResponse({
         message: "Algunos campos que mandaste estan vacios",
@@ -49,6 +57,7 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     film.Duration_Minutes = durationMinutes;
     film.Genders = genders;
     film.Image_Url = imageUrl;
+    film.Stars = stars;
 
     await film.save();
 

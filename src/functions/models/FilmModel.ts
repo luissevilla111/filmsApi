@@ -10,6 +10,7 @@ export class Film extends Item {
   Duration_Minutes: string;
   Genders: string[];
   Image_Url: string;
+  Stars: Number;
 }
 
 const filmSchema = new dynamoose.Schema(
@@ -21,6 +22,7 @@ const filmSchema = new dynamoose.Schema(
     Duration_Minutes: String,
     Genders: { type: Array },
     Image_Url: String,
+    Stars: Number,
   },
   {
     timestamps: true,
