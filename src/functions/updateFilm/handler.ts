@@ -37,6 +37,12 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       Name: name.toString(),
     });
 
+    if (!film) {
+      return formatJSONResponse({
+        film: {},
+      });
+    }
+
     //console.log(film);
 
     film.Description = description;
