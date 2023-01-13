@@ -40,8 +40,8 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     }
 
     const film = await FilmModel.get({
-      Saga: saga.toString(),
-      Name: name.toString(),
+      Saga: saga.toString().toUpperCase(),
+      Name: name.toString().toUpperCase(),
     });
 
     if (!film) {

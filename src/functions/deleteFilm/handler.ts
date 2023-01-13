@@ -31,7 +31,7 @@ const deleteFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 
     if (!film) {
       return formatJSONResponse({
-        film: {},
+        message: "The Film was not found",
       });
     }
 
