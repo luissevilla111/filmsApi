@@ -38,11 +38,13 @@ const updateFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
         message: "Algunos campos que mandaste estan vacios",
       });
     }
+    
 
     const film = await FilmModel.get({
       Saga: saga.toString().toUpperCase(),
       Name: name.toString().toUpperCase(),
     });
+    
 
     if (!film) {
       return formatJSONResponse({
