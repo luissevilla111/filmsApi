@@ -29,7 +29,12 @@ const serverlessConfiguration: AWS = {
     iamRoleStatements: [
       {
         Effect: "Allow",
-        Action: ["dynamodb:PutItem", "dynamodb:Scan", "dynamodb:GetItem"],
+        Action: [
+          "dynamodb:PutItem",
+          "dynamodb:Scan",
+          "dynamodb:GetItem",
+          "dynamodb:DeleteItem",
+        ],
         Resource: [`${process.env.DYNAMO_RESOURCE}`],
       },
     ],
