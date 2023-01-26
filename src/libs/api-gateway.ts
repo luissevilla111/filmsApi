@@ -16,11 +16,11 @@ export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<
 export const formatJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 200,
-    headers: {
+   /*  headers: {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "*",
-    },
+    }, */
     body: JSON.stringify(response),
   };
 };
@@ -28,11 +28,11 @@ export const formatJSONResponse = (response: Record<string, unknown>) => {
 export const errorJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 500,
-    headers: {
+    /* headers: {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "*",
-    },
+    }, */
     body: JSON.stringify(response),
   };
 };
@@ -40,11 +40,11 @@ export const errorJSONResponse = (response: Record<string, unknown>) => {
 export const badRequestJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 400,
-    headers: {
+    /* headers: {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "*",
-    },
+    }, */
     body: JSON.stringify(response),
   };
 };
