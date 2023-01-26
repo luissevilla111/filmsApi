@@ -1,26 +1,50 @@
-import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from "aws-lambda"
+import type {
+  APIGatewayProxyEvent,
+  APIGatewayProxyResult,
+  Handler,
+} from "aws-lambda";
 import type { FromSchema } from "json-schema-to-ts";
 
-type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> }
-export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, APIGatewayProxyResult>
+type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, "body"> & {
+  body: FromSchema<S>;
+};
+export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<
+  ValidatedAPIGatewayProxyEvent<S>,
+  APIGatewayProxyResult
+>;
 
 export const formatJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 200,
-    body: JSON.stringify(response)
-  }
-}
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "https://www.example.com",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
+    body: JSON.stringify(response),
+  };
+};
 
 export const errorJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 500,
-    body: JSON.stringify(response)
-  }
-}
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "https://www.example.com",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
+    body: JSON.stringify(response),
+  };
+};
 
 export const badRequestJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 400,
-    body: JSON.stringify(response)
-  }
-}
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "https://www.example.com",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
+    body: JSON.stringify(response),
+  };
+};
