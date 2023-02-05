@@ -35,7 +35,7 @@ const getFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       .exec();
     const { lastKey } = films;
 
-    console.log(films);
+    console.log(films.length);
 
     return formatJSONResponse({
       films,
