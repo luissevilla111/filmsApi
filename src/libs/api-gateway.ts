@@ -18,9 +18,9 @@ export const formatJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 200,
     headers: {
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": `${URL_ALLOWED}`,
-      "Access-Control-Allow-Methods": `${URL_ALLOWED}`,
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Origin": `*`,
+      "Access-Control-Allow-Methods": `*`,
     },
     body: JSON.stringify(response),
   };
@@ -30,9 +30,9 @@ export const errorJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 500,
     headers: {
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": `${URL_ALLOWED}`,
-      "Access-Control-Allow-Methods": `${URL_ALLOWED}`,
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Origin": `*`,
+      "Access-Control-Allow-Methods": `*`,
     },
     body: JSON.stringify(response),
   };
@@ -42,9 +42,9 @@ export const badRequestJSONResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 400,
     headers: {
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": `${URL_ALLOWED}`,
-      "Access-Control-Allow-Methods": `${URL_ALLOWED}`,
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Origin": `*`,
+      "Access-Control-Allow-Methods": `*`,
     },
     body: JSON.stringify(response),
   };

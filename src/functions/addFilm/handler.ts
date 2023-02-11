@@ -56,7 +56,7 @@ const addFilm: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       Stars: stars,
     });
     //console.log(newFilm);
-
+    console.log("Add Film");
     return formatJSONResponse({
       film: newFilm,
     });

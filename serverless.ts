@@ -7,6 +7,7 @@ import getFilms from "@functions/getFilms";
 import updateFilm from "@functions/updateFilm";
 import deleteFilm from "@functions/deleteFilm";
 import getFilm from "@functions/getFilm";
+import OPTIONSMETHOD from "@functions/OPTIONSMETHOD";
 const serverlessConfiguration: AWS = {
   service: "filmsApi",
   frameworkVersion: "3",
@@ -40,7 +41,15 @@ const serverlessConfiguration: AWS = {
     ],
   },
   // import the function via paths
-  functions: { hello, addFilm, getFilms, updateFilm, deleteFilm, getFilm },
+  functions: {
+    hello,
+    addFilm,
+    getFilms,
+    updateFilm,
+    deleteFilm,
+    getFilm,
+    OPTIONSMETHOD,
+  },
   package: { individually: true },
   custom: {
     esbuild: {

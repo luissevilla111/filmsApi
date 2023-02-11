@@ -4,3 +4,4 @@ export { default as getFilms } from "./getFilms";
 export { default as updateFilm } from "./updateFilm";
 export { default as deleteFilm } from "./deleteFilm";
 export { default as getFilm } from "./getFilm";
+export { default as optionsMethod } from "./OPTIONSMETHOD";
